@@ -34,6 +34,15 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   function createBoard() {
     let initialBoard = [];
     // TODO: create array-of-arrays of true/false values
+
+    for(let x = 0; x < nrows; x++){
+      let columns = [];
+      for(let y = 0; y < ncols; y++){
+        const cellLit = chanceLightStartsOn ? Boolean(Math.round(Math.random())) : false;
+        columns.push(cellLit);
+      }
+      initialBoard.push(columns);
+    }
     return initialBoard;
   }
 
@@ -62,12 +71,25 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   // if the game is won, just show a winning msg & render nothing else
-
   // TODO
 
   // make table board
-
   // TODO
+  let rowsBoard = [];
+  for(let row of board){
+    const renderRow = row.map(column => {
+      return <Cell flipCellsAroundMe={flipCellsAround} isLit={column} />
+    });
+    rowsBoard.push(<tr>{ renderRow }</tr>);
+  }
+
+  return (
+    <div className="Board">
+      <table>
+        { rowsBoard }
+      </table>
+    </div>
+  );
 }
 
 export default Board;
