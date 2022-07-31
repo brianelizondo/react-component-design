@@ -14,9 +14,13 @@ import "./Cell.css";
  *
  **/
 
-function Cell({ flipCellsAroundMe, isLit }) {
+function Cell({ flipCellsAroundMe, isLit, coord }) {
+  function handleFlipCells(evt) {
+    flipCellsAroundMe(coord);
+  }
+
   const classes = `Cell ${isLit ? "Cell-lit" : ""}`;
-  return <td className={classes} onClick={flipCellsAroundMe} />;
+  return <td className={classes} onClick={handleFlipCells} />;
 }
 
 export default Cell;
